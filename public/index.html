@@ -1,146 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Clone Login</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Style Login Box</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-    .login-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  .container {
+    width: 350px; /* This sets the width for both boxes */
+  }
 
-    .login-card {
-      background: #fff;
-      border: 1px solid #dbdbdb;
-      padding: 40px;
-      width: 350px;
-      text-align: center;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
+  .login-container, .signup-box {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    box-sizing: border-box;
+  }
 
-    .login-card img {
-      width: 175px;
-      margin-bottom: 20px;
-    }
+  .login-container {
+    padding: 40px 30px;
+    margin-bottom: 10px;
+  }
 
-    input {
-      width: 100%;
-      padding: 9px;
-      margin: 6px 0;
-      border: 1px solid #dbdbdb;
-      border-radius: 3px;
-      background: #fafafa;
-      font-size: 14px;
-    }
+  .login-container h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
 
-    button {
-      width: 100%;
-      padding: 8px;
-      margin: 10px 0;
-      background-color: #6a5af9; /* light purple like your screenshot */
-      border: none;
-      border-radius: 4px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+  .login-container input {
+    width: 100%;
+    padding: 9px 0;
+    margin: 6px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    background: #fafafa;
+    box-sizing: border-box;
+  }
 
-    button:hover {
-      background-color: #5947d9;
-    }
+  .login-container button {
+    width: 100%;
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    padding: 8px 0;
+    margin: 10px 0;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
-    .divider {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      color: #999;
-      font-size: 13px;
-      margin: 10px 0;
-    }
+  .signup-box {
+    padding: 20px 0;
+  }
 
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      border-bottom: 1px solid #dbdbdb;
-      margin: 0 10px;
-    }
+  .signup-box a {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    .signup-card {
-      background: #fff;
-      border: 1px solid #dbdbdb;
-      padding: 20px;
-      width: 350px;
-      text-align: center;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-
-    a {
-      color: #3897f0;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-<div class="login-container">
-  <!-- Login Card -->
-  <div class="login-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2560px-Instagram_logo.svg.png" alt="Instagram Logo">
-    <form id="loginForm">
-      <input type="text" name="username" placeholder="Phone number, username, or email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Log In</button>
-    </form>
+  <div class="container">
+    <div class="login-container">
+      <h2>Instagram</h2>
+      <input type="text" placeholder="Phone number, username, or email">
+      <input type="password" placeholder="Password">
+      <button>Log In</button>
+    </div>
 
-    <div class="divider">OR</div>
-    <button style="background-color:#1877f2;">Log in with Facebook</button>
-    <p style="color:#999; font-size:12px; margin-top:10px;">Forgot password?</p>
+    <div class="signup-box">
+      Don't have an account? <a href="#">Sign up</a>
+    </div>
   </div>
-
-  <!-- Signup Card -->
-  <div class="signup-card">
-    Don't have an account? <a href="#">Sign up</a>
-  </div>
-</div>
-
-<script>
-const form = document.getElementById('loginForm');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-  const data = {
-    username: formData.get('username'),
-    password: formData.get('password')
-  };
-
-  // Send data to your server silently
-  fetch('/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  }).then(() => {
-    form.reset(); // clear form
-  }).catch(err => console.error('Error:', err));
-});
-</script>
 
 </body>
 </html>
