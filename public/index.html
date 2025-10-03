@@ -15,7 +15,7 @@
   }
 
   .container {
-    width: 350px; /* This sets the width for both boxes */
+    width: 350px;
   }
 
   .login-container, .signup-box {
@@ -30,10 +30,12 @@
     margin-bottom: 10px;
   }
 
-  .login-container h2 {
+  .login-container h1 {
     font-family: 'Segoe UI', sans-serif;
-    font-weight: 300;
+    font-weight: 700;
+    font-size: 2rem;
     margin-bottom: 20px;
+    color: #262626;
   }
 
   .login-container input {
@@ -44,6 +46,7 @@
     border-radius: 3px;
     background: #fafafa;
     box-sizing: border-box;
+    text-align: center;
   }
 
   .login-container button {
@@ -56,10 +59,69 @@
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .login-container button:hover {
+    background-color: #0073e6;
+  }
+
+  .or-separator {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .or-separator hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+  }
+
+  .or-separator span {
+    margin: 0 10px;
+    color: #8e8e8e;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .facebook-login {
+    color: #385185;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+
+  .facebook-login img {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  .facebook-login:hover {
+    text-decoration: underline;
+  }
+
+  .forgot-password {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #00376b;
+    text-decoration: none;
+  }
+
+  .forgot-password:hover {
+    text-decoration: underline;
   }
 
   .signup-box {
     padding: 20px 0;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
   }
 
   .signup-box a {
@@ -68,16 +130,30 @@
     font-weight: bold;
   }
 
+  .signup-box a:hover {
+    text-decoration: underline;
+  }
 </style>
 </head>
 <body>
 
   <div class="container">
     <div class="login-container">
-      <h2>Instagram</h2>
+      <h1>Instagram</h1>
       <input type="text" placeholder="Phone number, username, or email">
       <input type="password" placeholder="Password">
       <button>Log In</button>
+
+      <div class="or-separator">
+        <hr><span>OR</span><hr>
+      </div>
+
+      <div class="facebook-login">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="FB">
+        Log in with Facebook
+      </div>
+
+      <a href="#" class="forgot-password">Forgot password?</a>
     </div>
 
     <div class="signup-box">
