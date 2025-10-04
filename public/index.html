@@ -30,17 +30,18 @@
     margin-bottom: 10px;
   }
 
-  .login-container h1 {
-    font-family: 'Segoe UI', sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
+  /* REMOVE default h1 styling, since we're replacing it */
+  /* .login-container h1 { } --> Not needed anymore */
+
+  .logo {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
-    color: #262626;
   }
 
   .login-container input {
     width: 100%;
-    padding: 9px 0;
+    padding: 9px 10px;
     margin: 6px 0;
     border: 1px solid #dbdbdb;
     border-radius: 3px;
@@ -139,10 +140,28 @@
 
   <div class="container">
     <div class="login-container">
-      <h1>Instagram</h1>
+
+      <!-- ✅ Instagram Logo (Replaces the <h1>) -->
+      <div class="logo">
+        <i
+          data-visualcompletion="css-img"
+          aria-label="Instagram"
+          role="img"
+          style="
+            background-image: url('https://static.cdninstagram.com/rsrc.php/v4/yz/r/H_-3Vh0lHeK.png');
+            background-position: 0px -2959px;
+            background-size: auto;
+            width: 175px;
+            height: 51px;
+            background-repeat: no-repeat;
+            display: inline-block;
+          ">
+        </i>
+      </div>
+
       <input type="text" placeholder="Phone number, username, or email">
       <input type="password" placeholder="Password">
-      <button>Log In</button>
+      <button>Log in</button>
 
       <div class="or-separator">
         <hr><span>OR</span><hr>
